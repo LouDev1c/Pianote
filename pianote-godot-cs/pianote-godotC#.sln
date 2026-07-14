@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pianote-godotC#", "pianote-godotC#.csproj", "{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{EDE730AE-0BA7-4FEC-80FD-83694CC85B0A}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

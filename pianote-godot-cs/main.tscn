@@ -1,0 +1,729 @@
+[gd_scene format=3 uid="uid://vmmlj4nrmcsq"]
+
+[ext_resource type="Script" uid="uid://boviuo2kxb7ff" path="res://scripts/controllers/audio_ctrl.gd" id="1_audio"]
+[ext_resource type="Script" uid="uid://bjl2bcox3qtrq" path="res://scripts/controllers/InputCtrl.cs" id="2_input"]
+[ext_resource type="Script" uid="uid://cd5pjgwlu5opa" path="res://scripts/controllers/GameCtrl.cs" id="3_game"]
+[ext_resource type="Script" uid="uid://c2nrhldgqhafv" path="res://scripts/controllers/EvalCtrl.cs" id="4_eval"]
+[ext_resource type="Script" uid="uid://bjc7ktymqfdw7" path="res://scripts/ui/ui_root.gd" id="5_uiroot"]
+[ext_resource type="Script" uid="uid://dmy6cq6hryln3" path="res://scripts/ui/menu.gd" id="6_menu"]
+[ext_resource type="Script" uid="uid://g7q1km8scnxk" path="res://scripts/ui/song_list_page.gd" id="7_songlist"]
+[ext_resource type="Script" uid="uid://c5l8aedoxm8t5" path="res://scripts/ui/game_page.gd" id="8_gamepage"]
+[ext_resource type="Script" uid="uid://5yib8fydb32r" path="res://scripts/ui/result_page.gd" id="9_result"]
+[ext_resource type="Script" uid="uid://dn58xdhy4n6cb" path="res://scripts/ui/setting_page.gd" id="10_setting"]
+[ext_resource type="Script" uid="uid://cevqbdf5jmx4r" path="res://scripts/ui/chart_adjust_page.gd" id="11_chartadjust"]
+[ext_resource type="Script" uid="uid://dtn5n1q5dog3o" path="res://scripts/repository/music_repo.gd" id="12_musicrepo"]
+[ext_resource type="Script" uid="uid://d17ue1isn2ns2" path="res://scripts/repository/song_data.gd" id="13_songdata"]
+[ext_resource type="Texture2D" uid="uid://dab77jg21h6f3" path="res://assets/music_repo/Song_001/cover.jpg" id="14_cover1"]
+[ext_resource type="AudioStream" uid="uid://wm8asfxiinqh" path="res://assets/music_repo/Song_001/preview.wav" id="15_preview1"]
+[ext_resource type="Texture2D" uid="uid://iau82s3vb7g7" path="res://assets/music_repo/Song_002/cover.jpg" id="16_cover2"]
+[ext_resource type="AudioStream" uid="uid://dajmiwojichte" path="res://assets/music_repo/Song_002/preview.wav" id="17_preview2"]
+[ext_resource type="Script" uid="uid://okh44bsb78ob" path="res://scripts/ui/loading_page.gd" id="18_loading"]
+
+[node name="Main" type="Node2D" unique_id=1145443954]
+
+[node name="AudioCtrl" type="Node" parent="." unique_id=218629893 node_paths=PackedStringArray("eval_ctrl")]
+script = ExtResource("1_audio")
+eval_ctrl = NodePath("../EvalCtrl")
+
+[node name="InputCtrl" type="Node2D" parent="." unique_id=183791307]
+script = ExtResource("2_input")
+
+[node name="GameCtrl" type="Node2D" parent="." unique_id=1868097090]
+script = ExtResource("3_game")
+
+[node name="LaneBackground" type="ColorRect" parent="GameCtrl" unique_id=382581525]
+offset_right = 960.0
+offset_bottom = 640.0
+color = Color(0.0352941, 0.0392157, 0.0470588, 1)
+
+[node name="LaneGridRoot" type="Node2D" parent="GameCtrl" unique_id=636067393]
+
+[node name="NoteLaneRoot" type="Node2D" parent="GameCtrl" unique_id=1733311636]
+
+[node name="HitLine" type="ColorRect" parent="GameCtrl" unique_id=552376393]
+offset_top = 558.0
+offset_right = 960.0
+offset_bottom = 564.0
+color = Color(1, 1, 1, 0.82)
+
+[node name="KeyboardRoot" type="Node2D" parent="GameCtrl" unique_id=113341075]
+
+[node name="EvalCtrl" type="Node2D" parent="." unique_id=1609119120]
+script = ExtResource("4_eval")
+
+[node name="UIRoot" type="CanvasLayer" parent="." unique_id=124982351 node_paths=PackedStringArray("initial_page")]
+script = ExtResource("5_uiroot")
+initial_page = NodePath("MenuPage")
+
+[node name="MenuPage" type="Control" parent="UIRoot" unique_id=724402203 node_paths=PackedStringArray("song_list_page", "game_page", "result_page", "setting_page")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_menu")
+song_list_page = NodePath("../SongListPage")
+game_page = NodePath("../GamePage")
+result_page = NodePath("../ResultPage")
+setting_page = NodePath("../SettingPage")
+
+[node name="MenuBg" type="ColorRect" parent="UIRoot/MenuPage" unique_id=1654544283]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.033, 0.04, 1)
+
+[node name="TitleText" type="Label" parent="UIRoot/MenuPage" unique_id=1230765783]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_right = 260.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 104
+text = "Pianote"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnContainer" type="VBoxContainer" parent="UIRoot/MenuPage" unique_id=748758924]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -110.0
+offset_right = 140.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Btn_Start" type="Button" parent="UIRoot/MenuPage/BtnContainer" unique_id=655918434]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+text = "Start"
+
+[node name="Btn_Setting" type="Button" parent="UIRoot/MenuPage/BtnContainer" unique_id=264033511]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+text = "Settings"
+
+[node name="Btn_Exit" type="Button" parent="UIRoot/MenuPage/BtnContainer" unique_id=753574153]
+custom_minimum_size = Vector2(280, 60)
+layout_mode = 2
+text = "Exit"
+
+[node name="SongListPage" type="Control" parent="UIRoot" unique_id=692265540 node_paths=PackedStringArray("menu_page", "game_page", "loading_page", "music_repo", "game_ctrl", "cover_image", "title_label", "info_label", "btn_difficulty", "btn_start", "preview_player", "song_items")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_songlist")
+menu_page = NodePath("../MenuPage")
+game_page = NodePath("../GamePage")
+loading_page = NodePath("../LoadingPage")
+music_repo = NodePath("../../MusicRepo")
+game_ctrl = NodePath("../../GameCtrl")
+cover_image = NodePath("InfoContainer/CoverImage")
+title_label = NodePath("InfoContainer/TitleLabel")
+info_label = NodePath("InfoContainer/InfoLabel")
+btn_difficulty = NodePath("InfoContainer/Btn_Difficulty")
+btn_start = NodePath("InfoContainer/Btn_Start")
+preview_player = NodePath("PreviewPlayer")
+song_items = [NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_001"), NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_002"), NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_003"), NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_004")]
+
+[node name="SongListBg" type="ColorRect" parent="UIRoot/SongListPage" unique_id=1490061031]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.033, 0.04, 1)
+
+[node name="Btn_Back" type="Button" parent="UIRoot/SongListPage" unique_id=436710899]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 132.0
+offset_bottom = 72.0
+text = "Back"
+
+[node name="SongListContainer" type="VBoxContainer" parent="UIRoot/SongListPage" unique_id=511850720]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 108.0
+offset_right = 640.0
+offset_bottom = 640.0
+theme_override_constants/separation = 10
+
+[node name="ScrollSongList" type="ScrollContainer" parent="UIRoot/SongListPage/SongListContainer" unique_id=790773976]
+custom_minimum_size = Vector2(592, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ListContainer" type="VBoxContainer" parent="UIRoot/SongListPage/SongListContainer/ScrollSongList" unique_id=44221675]
+custom_minimum_size = Vector2(560, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="SongItem_001" type="Button" parent="UIRoot/SongListPage/SongListContainer/ScrollSongList/ListContainer" unique_id=608237599]
+custom_minimum_size = Vector2(540, 82)
+layout_mode = 2
+
+[node name="SongItem_002" type="Button" parent="UIRoot/SongListPage/SongListContainer/ScrollSongList/ListContainer" unique_id=1804754605]
+custom_minimum_size = Vector2(540, 82)
+layout_mode = 2
+
+[node name="SongItem_003" type="Button" parent="UIRoot/SongListPage/SongListContainer/ScrollSongList/ListContainer" unique_id=1677227522]
+custom_minimum_size = Vector2(540, 82)
+layout_mode = 2
+
+[node name="SongItem_004" type="Button" parent="UIRoot/SongListPage/SongListContainer/ScrollSongList/ListContainer" unique_id=1536043152]
+custom_minimum_size = Vector2(540, 82)
+layout_mode = 2
+
+[node name="InfoContainer" type="Control" parent="UIRoot/SongListPage" unique_id=1662737789]
+anchors_preset = 0
+offset_left = 704.0
+offset_top = 108.0
+offset_right = 1110.0
+offset_bottom = 640.0
+
+[node name="CoverImage" type="TextureRect" parent="UIRoot/SongListPage/InfoContainer" unique_id=242869969]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 300.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="UIRoot/SongListPage/InfoContainer" unique_id=75812058]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 0
+offset_top = 216.0
+offset_right = 406.0
+offset_bottom = 252.0
+theme_override_font_sizes/font_size = 28
+text = "Select a Song"
+
+[node name="InfoLabel" type="Label" parent="UIRoot/SongListPage/InfoContainer" unique_id=800090810]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_top = 260.0
+offset_right = 406.0
+offset_bottom = 356.0
+text = "No song selected."
+
+[node name="Btn_Difficulty" type="Button" parent="UIRoot/SongListPage/InfoContainer" unique_id=1885273527]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 0
+offset_top = 416.0
+offset_right = 406.0
+offset_bottom = 460.0
+disabled = true
+text = "Difficulty: Normal"
+
+[node name="Btn_Start" type="Button" parent="UIRoot/SongListPage/InfoContainer" unique_id=94878543]
+custom_minimum_size = Vector2(240, 54)
+layout_mode = 0
+offset_top = 472.0
+offset_right = 406.0
+offset_bottom = 526.0
+disabled = true
+text = "Start Song"
+
+[node name="PreviewPlayer" type="AudioStreamPlayer" parent="UIRoot/SongListPage" unique_id=1712565759]
+
+[node name="LoadingPage" type="Control" parent="UIRoot" unique_id=1681572711 node_paths=PackedStringArray("song_list_page", "game_page", "game_ctrl", "title_label", "status_label", "detail_label", "progress_bar", "btn_back")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_loading")
+song_list_page = NodePath("../SongListPage")
+game_page = NodePath("../GamePage")
+game_ctrl = NodePath("../../GameCtrl")
+title_label = NodePath("LoadingContent/TitleLabel")
+status_label = NodePath("LoadingContent/StatusLabel")
+detail_label = NodePath("LoadingContent/DetailLabel")
+progress_bar = NodePath("LoadingContent/ProgressBar")
+btn_back = NodePath("LoadingContent/Btn_Back")
+
+[node name="LoadingBg" type="ColorRect" parent="UIRoot/LoadingPage" unique_id=1084733771]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.025, 0.028, 0.034, 1)
+
+[node name="LoadingContent" type="VBoxContainer" parent="UIRoot/LoadingPage" unique_id=709634611]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 210.0
+offset_right = 920.0
+offset_bottom = 510.0
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="UIRoot/LoadingPage/LoadingContent" unique_id=1921445487]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Preparing Song"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="StatusLabel" type="Label" parent="UIRoot/LoadingPage/LoadingContent" unique_id=1053699974]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Preparing chart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UIRoot/LoadingPage/LoadingContent" unique_id=813308223]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+value = 12.0
+show_percentage = false
+
+[node name="DetailLabel" type="Label" parent="UIRoot/LoadingPage/LoadingContent" unique_id=1808546987]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+text = "Reading score.midi"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Btn_Back" type="Button" parent="UIRoot/LoadingPage/LoadingContent" unique_id=688856025]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Back to Song List"
+
+[node name="GamePage" type="Control" parent="UIRoot" unique_id=431756262 node_paths=PackedStringArray("song_list_page", "menu_page", "setting_page", "game_ctrl", "eval_ctrl", "judgement_label", "score_label", "combo_label", "pause_button", "pause_overlay", "countdown_overlay", "countdown_label")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_gamepage")
+song_list_page = NodePath("../SongListPage")
+menu_page = NodePath("../MenuPage")
+setting_page = NodePath("../SettingPage")
+game_ctrl = NodePath("../../GameCtrl")
+eval_ctrl = NodePath("../../EvalCtrl")
+judgement_label = NodePath("Hud/JudgementLabel")
+score_label = NodePath("Hud/ScoreLabel")
+combo_label = NodePath("Hud/ComboLabel")
+pause_button = NodePath("Btn_Pause")
+pause_overlay = NodePath("PauseOverlay")
+countdown_overlay = NodePath("CountdownOverlay")
+countdown_label = NodePath("CountdownOverlay/CountdownLabel")
+
+[node name="Hud" type="VBoxContainer" parent="UIRoot/GamePage" unique_id=1579359455]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 40.0
+offset_right = 1260.0
+offset_bottom = 240.0
+theme_override_constants/separation = 8
+
+[node name="JudgementLabel" type="Label" parent="UIRoot/GamePage/Hud" unique_id=36543969]
+custom_minimum_size = Vector2(260, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Ready"
+
+[node name="ScoreLabel" type="Label" parent="UIRoot/GamePage/Hud" unique_id=1505488719]
+custom_minimum_size = Vector2(260, 32)
+layout_mode = 2
+text = "Score: 0"
+
+[node name="ComboLabel" type="Label" parent="UIRoot/GamePage/Hud" unique_id=1067642889]
+custom_minimum_size = Vector2(260, 32)
+layout_mode = 2
+text = "Combo: 0"
+
+[node name="Btn_Pause" type="Button" parent="UIRoot/GamePage" unique_id=1377703747]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 144.0
+offset_bottom = 72.0
+text = "Pause"
+
+[node name="PauseOverlay" type="Control" parent="UIRoot/GamePage"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+z_index = 100
+
+[node name="Dim" type="ColorRect" parent="UIRoot/GamePage/PauseOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0.72)
+
+[node name="PausePanel" type="Panel" parent="UIRoot/GamePage/PauseOverlay"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 120.0
+offset_right = 840.0
+offset_bottom = 600.0
+
+[node name="PauseMargin" type="MarginContainer" parent="UIRoot/GamePage/PauseOverlay/PausePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="VBoxContainer" parent="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TitleLabel" type="Label" parent="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Btn_Continue" type="Button" parent="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "Continue"
+
+[node name="Btn_SongList" type="Button" parent="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "Return to Song List"
+
+[node name="Btn_MainMenu" type="Button" parent="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="Btn_Settings" type="Button" parent="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "Settings"
+
+[node name="CountdownOverlay" type="Control" parent="UIRoot/GamePage"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+z_index = 110
+
+[node name="Dim" type="ColorRect" parent="UIRoot/GamePage/CountdownOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0.38)
+
+[node name="CountdownLabel" type="Label" parent="UIRoot/GamePage/CountdownOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 144
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultPage" type="Control" parent="UIRoot" unique_id=2111987166 node_paths=PackedStringArray("menu_page")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_result")
+menu_page = NodePath("../MenuPage")
+
+[node name="ResultLabel" type="Label" parent="UIRoot/ResultPage" unique_id=833794526]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -40.0
+offset_right = 160.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 42
+text = "Result"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingPage" type="Control" parent="UIRoot" unique_id=342177350 node_paths=PackedStringArray("menu_page", "chart_adjust_page", "resolution_dropdown", "volume_slider", "language_dropdown", "btn_chart_adjust")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_setting")
+menu_page = NodePath("../MenuPage")
+chart_adjust_page = NodePath("../ChartAdjustPage")
+resolution_dropdown = NodePath("SettingContainer/GraphicsGroup/ResolutionDropdown")
+volume_slider = NodePath("SettingContainer/AudioGroup/VolumeSlider")
+language_dropdown = NodePath("SettingContainer/LanguageGroup/LanguageDropdown")
+btn_chart_adjust = NodePath("SettingContainer/ChartAdjustGroup/Btn_ChartAdjust")
+
+[node name="SettingBg" type="ColorRect" parent="UIRoot/SettingPage" unique_id=1535257897]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.033, 0.04, 1)
+
+[node name="SettingContainer" type="VBoxContainer" parent="UIRoot/SettingPage" unique_id=540480773]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -220.0
+offset_right = 280.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="TitleText" type="Label" parent="UIRoot/SettingPage/SettingContainer" unique_id=70402944]
+custom_minimum_size = Vector2(560, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GraphicsGroup" type="HBoxContainer" parent="UIRoot/SettingPage/SettingContainer" unique_id=2147254193]
+custom_minimum_size = Vector2(560, 48)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="GraphicsLabel" type="Label" parent="UIRoot/SettingPage/SettingContainer/GraphicsGroup" unique_id=416887281]
+custom_minimum_size = Vector2(150, 48)
+layout_mode = 2
+text = "Resolution"
+vertical_alignment = 1
+
+[node name="ResolutionDropdown" type="OptionButton" parent="UIRoot/SettingPage/SettingContainer/GraphicsGroup" unique_id=787339607]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+item_count = 6
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1366x768"
+popup/item_1/id = 1
+popup/item_2/text = "1600x900"
+popup/item_2/id = 2
+popup/item_3/text = "1920x720"
+popup/item_3/id = 3
+popup/item_4/text = "1920x1080"
+popup/item_4/id = 4
+popup/item_5/text = "2560x1440"
+popup/item_5/id = 5
+
+[node name="AudioGroup" type="HBoxContainer" parent="UIRoot/SettingPage/SettingContainer" unique_id=1243607389]
+custom_minimum_size = Vector2(560, 48)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AudioLabel" type="Label" parent="UIRoot/SettingPage/SettingContainer/AudioGroup" unique_id=1988100367]
+custom_minimum_size = Vector2(150, 48)
+layout_mode = 2
+text = "Volume"
+vertical_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="UIRoot/SettingPage/SettingContainer/AudioGroup" unique_id=129283355]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+value = 80.0
+
+[node name="LanguageGroup" type="HBoxContainer" parent="UIRoot/SettingPage/SettingContainer" unique_id=388380513]
+custom_minimum_size = Vector2(560, 48)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LanguageLabel" type="Label" parent="UIRoot/SettingPage/SettingContainer/LanguageGroup" unique_id=2057986192]
+custom_minimum_size = Vector2(150, 48)
+layout_mode = 2
+text = "Language"
+vertical_alignment = 1
+
+[node name="LanguageDropdown" type="OptionButton" parent="UIRoot/SettingPage/SettingContainer/LanguageGroup" unique_id=1266959859]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Chinese"
+popup/item_1/id = 1
+
+[node name="ChartAdjustGroup" type="HBoxContainer" parent="UIRoot/SettingPage/SettingContainer" unique_id=1464695721]
+custom_minimum_size = Vector2(560, 48)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ChartAdjustLabel" type="Label" parent="UIRoot/SettingPage/SettingContainer/ChartAdjustGroup" unique_id=1677955127]
+custom_minimum_size = Vector2(150, 48)
+layout_mode = 2
+text = "Chart Offset"
+vertical_alignment = 1
+
+[node name="Btn_ChartAdjust" type="Button" parent="UIRoot/SettingPage/SettingContainer/ChartAdjustGroup" unique_id=662641853]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+text = "Adjust"
+
+[node name="Btn_Back" type="Button" parent="UIRoot/SettingPage/SettingContainer" unique_id=995171238]
+custom_minimum_size = Vector2(560, 56)
+layout_mode = 2
+text = "Back"
+
+[node name="ChartAdjustPage" type="Control" parent="UIRoot" unique_id=2003034842 node_paths=PackedStringArray("setting_page")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_chartadjust")
+setting_page = NodePath("../SettingPage")
+
+[node name="TipsText" type="Label" parent="UIRoot/ChartAdjustPage" unique_id=1859937209]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -32.0
+offset_right = 260.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Chart offset tools will be expanded here."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Btn_Back" type="Button" parent="UIRoot/ChartAdjustPage" unique_id=1941239207]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 132.0
+offset_bottom = 72.0
+text = "Back"
+
+[node name="MusicRepo" type="Node" parent="." unique_id=2090622456]
+script = ExtResource("12_musicrepo")
+
+[node name="Song_001" type="Node" parent="MusicRepo" unique_id=1015123986]
+script = ExtResource("13_songdata")
+song_id = "Song_001"
+song_name = "Bohemian Rhapsody"
+composer = "Queen"
+level = "10"
+cover_texture = ExtResource("14_cover1")
+preview_audio = ExtResource("15_preview1")
+chart_file = "res://assets/music_repo/Song_001/score.midi"
+description = "MAESTRO audio and MIDI are ready for chart conversion."
+
+[node name="Song_002" type="Node" parent="MusicRepo" unique_id=1300458959]
+script = ExtResource("13_songdata")
+song_id = "Song_002"
+song_name = "Somebody To Love"
+composer = "Queen"
+level = "12"
+cover_texture = ExtResource("16_cover2")
+preview_audio = ExtResource("17_preview2")
+chart_file = "res://assets/music_repo/Song_002/score.midi"
+description = "MAESTRO audio and MIDI are ready for chart conversion."
+
+[connection signal="pressed" from="UIRoot/MenuPage/BtnContainer/Btn_Start" to="UIRoot/MenuPage" method="_btn_start_click"]
+[connection signal="pressed" from="UIRoot/MenuPage/BtnContainer/Btn_Setting" to="UIRoot/MenuPage" method="_btn_setting_click"]
+[connection signal="pressed" from="UIRoot/MenuPage/BtnContainer/Btn_Exit" to="UIRoot/MenuPage" method="_btn_exit_click"]
+[connection signal="pressed" from="UIRoot/SongListPage/Btn_Back" to="UIRoot/SongListPage" method="_on_back_pressed"]
+[connection signal="pressed" from="UIRoot/SongListPage/InfoContainer/Btn_Difficulty" to="UIRoot/SongListPage" method="_on_btn_difficulty_pressed"]
+[connection signal="pressed" from="UIRoot/SongListPage/InfoContainer/Btn_Start" to="UIRoot/SongListPage" method="_on_btn_start_pressed"]
+[connection signal="pressed" from="UIRoot/LoadingPage/LoadingContent/Btn_Back" to="UIRoot/LoadingPage" method="_on_btn_back_pressed"]
+[connection signal="pressed" from="UIRoot/GamePage/Btn_Pause" to="UIRoot/GamePage" method="_on_btn_pause_pressed"]
+[connection signal="pressed" from="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu/Btn_Continue" to="UIRoot/GamePage" method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu/Btn_SongList" to="UIRoot/GamePage" method="_on_btn_song_list_pressed"]
+[connection signal="pressed" from="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu/Btn_MainMenu" to="UIRoot/GamePage" method="_on_btn_main_menu_pressed"]
+[connection signal="pressed" from="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu/Btn_Settings" to="UIRoot/GamePage" method="_on_btn_settings_pressed"]
+[connection signal="item_selected" from="UIRoot/SettingPage/SettingContainer/GraphicsGroup/ResolutionDropdown" to="UIRoot/SettingPage" method="_on_resolution_dropdown_item_selected"]
+[connection signal="value_changed" from="UIRoot/SettingPage/SettingContainer/AudioGroup/VolumeSlider" to="UIRoot/SettingPage" method="_on_volume_slider_value_changed"]
+[connection signal="item_selected" from="UIRoot/SettingPage/SettingContainer/LanguageGroup/LanguageDropdown" to="UIRoot/SettingPage" method="_on_language_dropdown_item_selected"]
+[connection signal="pressed" from="UIRoot/SettingPage/SettingContainer/ChartAdjustGroup/Btn_ChartAdjust" to="UIRoot/SettingPage" method="_on_btn_chart_adjust_pressed"]
+[connection signal="pressed" from="UIRoot/SettingPage/SettingContainer/Btn_Back" to="UIRoot/SettingPage" method="_on_btn_back_pressed"]
+[connection signal="pressed" from="UIRoot/ChartAdjustPage/Btn_Back" to="UIRoot/ChartAdjustPage" method="_on_btn_back_pressed"]
