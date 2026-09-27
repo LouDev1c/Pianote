@@ -1,0 +1,94 @@
+keys,en,zh_CN
+Start,Start,开始
+Settings,Settings,设置
+Exit,Exit,退出
+Back,Back,返回
+Pause,Pause,暂停
+Paused,Paused,已暂停
+Continue,Continue,继续
+Return to Song List,Return to Song List,返回选曲
+Return to Main Menu,Return to Main Menu,返回主菜单
+Select a Song,Select a Song,选择歌曲
+No song selected.,No song selected.,尚未选择歌曲。
+Difficulty: %s,Difficulty: %s,难度：%s
+Difficulty: Normal,Difficulty: Normal,难度：普通
+Difficulty: -,Difficulty: -,难度：-
+Start Song,Start Song,开始演奏
+SONG_INFO,"Composer: %s\nLevel: %s\nChart: %s\n%s","作曲者：%s\n等级：%s\n谱面：%s\n%s"
+Easy,Easy,简单
+Normal,Normal,普通
+Hard,Hard,困难
+Preparing Song,Preparing Song,正在准备歌曲
+Preparing chart,Preparing chart,正在准备谱面
+Reading score.midi,Reading score.midi,正在读取 score.midi
+Converting MIDI,Converting MIDI,正在转换 MIDI
+Building individual piano notes,Building individual piano notes,正在生成钢琴音符
+Chart ready,Chart ready,谱面已就绪
+%d notes  |  %s,%d notes  |  %s,%d 个音符  |  %s
+Unable to prepare chart,Unable to prepare chart,无法准备谱面
+Back to Song List,Back to Song List,返回歌曲列表
+The selected song or game controller is unavailable.,The selected song or game controller is unavailable.,所选歌曲或游戏控制器不可用。
+The MIDI chart contains no notes.,The MIDI chart contains no notes.,MIDI 谱面中没有音符。
+The chart was converted but the game could not start.,The chart was converted but the game could not start.,谱面已转换，但游戏无法启动。
+Ready,Ready,准备
+Score: %d,Score: %d,分数：%d
+Score: 0,Score: 0,分数：0
+Combo: %d,Combo: %d,连击：%d
+Combo: 0,Combo: 0,连击：0
+Perfect,Perfect,完美
+Great,Great,优秀
+Good,Good,良好
+Miss,Miss,未命中
+Result,Result,结果
+Resolution,Resolution,分辨率
+Volume,Volume,音量
+Language,Language,语言
+English,English,English
+Chinese,Chinese,中文
+Chart Offset,Chart Offset,谱面偏移
+Adjust,Adjust,调整
+Chart offset tools will be expanded here.,Chart offset tools will be expanded here.,谱面偏移工具将在此处扩展。
+Unknown,Unknown,未知
+Untitled,Untitled,未命名
+MAESTRO audio and MIDI are ready for chart conversion.,MAESTRO audio and MIDI are ready for chart conversion.,MAESTRO 音频与 MIDI 已准备好进行谱面转换。
+Calibrate before starting?,Calibrate before starting?,是否进行校准？
+Calibrate,Calibrate,校准
+Start Directly,Start Directly,直接开始
+Audio Calibration,Audio Calibration,音频校准
+Loading audio capture module,Loading audio capture module,正在加载音频采集模块
+"Checking Python, microphone support, and the input device","Checking Python, microphone support, and the input device",正在检查 Python、麦克风支持和输入设备
+Audio capture module ready,Audio capture module ready,音频采集模块已就绪
+Opening microphone calibration,Opening microphone calibration,正在打开麦克风校准
+The selected song or calibration page is unavailable.,The selected song or calibration page is unavailable.,所选歌曲或校准页面不可用。
+Unable to load the audio capture module: %s,Unable to load the audio capture module: %s,无法加载音频采集模块：%s
+Requesting microphone access,Requesting microphone access,正在请求麦克风权限
+Allow microphone access when your operating system asks.,Allow microphone access when your operating system asks.,请在操作系统询问时允许访问麦克风。
+The selected song is unavailable.,The selected song is unavailable.,所选歌曲不可用。
+Microphone access failed: %s,Microphone access failed: %s,麦克风访问失败：%s
+Unknown error,Unknown error,未知错误
+Microphone ready,Microphone ready,麦克风已就绪
+Microphone access was granted.,Microphone access was granted.,已获得麦克风权限。
+Environment sample,Environment sample,环境音采集
+"Next, 5 seconds of ambient sound will be recorded. Do not play any piano keys.","Next, 5 seconds of ambient sound will be recorded. Do not play any piano keys.",接下来会采集5秒环境音，请勿弹奏琴键
+Ready to record,Ready to record,准备录制
+Recording ambient sound,Recording ambient sound,正在录制环境音
+Piano samples,Piano samples,钢琴音频采集
+"Next, piano audio will be recorded. Play each key when instructed.","Next, piano audio will be recorded. Play each key when instructed.",接下来会采集钢琴音频，请根据指示弹奏琴键
+Press the %s key,Press the %s key,请按下%s键
+Recording the %s key,Recording the %s key,正在录制%s键音频
+Calibration complete,Calibration complete,校准完成
+Calibration is complete. The game will start shortly.,Calibration is complete. The game will start shortly.,已完成校准，稍后进入游戏
+Saving to %s,Saving to %s,将保存至 %s
+Unable to start the recorder.,Unable to start the recorder.,无法启动录音程序。
+Recording failed: %s,Recording failed: %s,录音失败：%s
+Saved %s,Saved %s,已保存 %s
+Calibration could not continue,Calibration could not continue,无法继续校准
+Cancel,Cancel,取消
+Retry,Retry,重试
+Recording starts when the countdown reaches zero.,Recording starts when the countdown reaches zero.,倒计时结束后将开始录音。
+The microphone is recording now. Follow the instruction until the countdown ends.,The microphone is recording now. Follow the instruction until the countdown ends.,麦克风正在录音，请按照提示操作并保持到倒计时结束。
+RECORDING,RECORDING,正在录音
+Preparing the recorder,Preparing the recorder,正在准备录音程序
+The countdown will start when the microphone is ready.,The countdown will start when the microphone is ready.,麦克风准备就绪后将开始倒计时。
+Recording finished,Recording finished,录音结束
+Saving the audio sample...,Saving the audio sample...,正在保存音频样本……

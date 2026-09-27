@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://iau82s3vb7g7" path="res://assets/music_repo/Song_002/cover.jpg" id="16_cover2"]
 [ext_resource type="AudioStream" uid="uid://dajmiwojichte" path="res://assets/music_repo/Song_002/preview.wav" id="17_preview2"]
 [ext_resource type="Script" uid="uid://okh44bsb78ob" path="res://scripts/ui/loading_page.gd" id="18_loading"]
+[ext_resource type="Script" uid="uid://bav3n8qni6uds" path="res://scripts/ui/calibration_page.gd" id="19_calibration"]
 
 [node name="Main" type="Node2D" unique_id=1145443954]
 
@@ -121,7 +122,7 @@ custom_minimum_size = Vector2(280, 60)
 layout_mode = 2
 text = "Exit"
 
-[node name="SongListPage" type="Control" parent="UIRoot" unique_id=692265540 node_paths=PackedStringArray("menu_page", "game_page", "loading_page", "music_repo", "game_ctrl", "cover_image", "title_label", "info_label", "btn_difficulty", "btn_start", "preview_player", "song_items")]
+[node name="SongListPage" type="Control" parent="UIRoot" unique_id=692265540 node_paths=PackedStringArray("menu_page", "game_page", "loading_page", "music_repo", "game_ctrl", "cover_image", "title_label", "info_label", "btn_difficulty", "btn_start", "preview_player", "start_confirmation", "song_items")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -141,6 +142,7 @@ info_label = NodePath("InfoContainer/InfoLabel")
 btn_difficulty = NodePath("InfoContainer/Btn_Difficulty")
 btn_start = NodePath("InfoContainer/Btn_Start")
 preview_player = NodePath("PreviewPlayer")
+start_confirmation = NodePath("StartConfirmation")
 song_items = [NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_001"), NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_002"), NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_003"), NodePath("SongListContainer/ScrollSongList/ListContainer/SongItem_004")]
 
 [node name="SongListBg" type="ColorRect" parent="UIRoot/SongListPage" unique_id=1490061031]
@@ -252,7 +254,84 @@ text = "Start Song"
 
 [node name="PreviewPlayer" type="AudioStreamPlayer" parent="UIRoot/SongListPage" unique_id=1712565759]
 
-[node name="LoadingPage" type="Control" parent="UIRoot" unique_id=1681572711 node_paths=PackedStringArray("song_list_page", "game_page", "game_ctrl", "title_label", "status_label", "detail_label", "progress_bar", "btn_back")]
+[node name="StartConfirmation" type="Control" parent="UIRoot/SongListPage"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+z_index = 100
+
+[node name="Dim" type="ColorRect" parent="UIRoot/SongListPage/StartConfirmation"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0.72)
+
+[node name="DialogPanel" type="Panel" parent="UIRoot/SongListPage/StartConfirmation"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 220.0
+offset_right = 980.0
+offset_bottom = 500.0
+
+[node name="DialogMargin" type="MarginContainer" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 28.0
+offset_right = -28.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogContent" type="VBoxContainer" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="QuestionLabel" type="Label" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Calibrate before starting?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Btn_Calibrate" type="Button" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent/Buttons"]
+custom_minimum_size = Vector2(180, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Calibrate"
+
+[node name="Btn_StartDirectly" type="Button" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent/Buttons"]
+custom_minimum_size = Vector2(180, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Directly"
+
+[node name="Btn_Exit" type="Button" parent="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent/Buttons"]
+custom_minimum_size = Vector2(180, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exit"
+
+[node name="LoadingPage" type="Control" parent="UIRoot" unique_id=1681572711 node_paths=PackedStringArray("song_list_page", "game_page", "calibration_page", "game_ctrl", "title_label", "status_label", "detail_label", "progress_bar", "btn_back")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -263,6 +342,7 @@ grow_vertical = 2
 script = ExtResource("18_loading")
 song_list_page = NodePath("../SongListPage")
 game_page = NodePath("../GamePage")
+calibration_page = NodePath("../CalibrationPage")
 game_ctrl = NodePath("../../GameCtrl")
 title_label = NodePath("LoadingContent/TitleLabel")
 status_label = NodePath("LoadingContent/StatusLabel")
@@ -323,6 +403,146 @@ visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 text = "Back to Song List"
+
+[node name="CalibrationPage" type="Control" parent="UIRoot" node_paths=PackedStringArray("song_list_page", "loading_page", "title_label", "status_label", "detail_label", "calibration_background", "recording_indicator", "btn_retry", "btn_back", "countdown_label", "waterfall_area", "falling_note", "hit_line", "key_label")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_calibration")
+song_list_page = NodePath("../SongListPage")
+loading_page = NodePath("../LoadingPage")
+title_label = NodePath("CalibrationContent/TitleLabel")
+status_label = NodePath("CalibrationContent/StatusLabel")
+detail_label = NodePath("CalibrationContent/DetailLabel")
+calibration_background = NodePath("CalibrationBg")
+recording_indicator = NodePath("CalibrationContent/RecordingIndicator")
+btn_retry = NodePath("CalibrationContent/Buttons/Btn_Retry")
+btn_back = NodePath("CalibrationContent/Buttons/Btn_Back")
+countdown_label = NodePath("CalibrationContent/CountdownLabel")
+waterfall_area = NodePath("CalibrationContent/WaterfallArea")
+falling_note = NodePath("CalibrationContent/WaterfallArea/FallingNote")
+hit_line = NodePath("CalibrationContent/WaterfallArea/HitLine")
+key_label = NodePath("CalibrationContent/KeyLabel")
+
+[node name="CalibrationBg" type="ColorRect" parent="UIRoot/CalibrationPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.025, 0.04, 0.075, 1)
+
+[node name="CalibrationContent" type="VBoxContainer" parent="UIRoot/CalibrationPage"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 100.0
+offset_right = 1000.0
+offset_bottom = 620.0
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="UIRoot/CalibrationPage/CalibrationContent"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Audio Calibration"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="UIRoot/CalibrationPage/CalibrationContent"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Requesting microphone access"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RecordingIndicator" type="Label" parent="UIRoot/CalibrationPage/CalibrationContent"]
+visible = false
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.28, 0.24, 1)
+theme_override_font_sizes/font_size = 25
+text = "● RECORDING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DetailLabel" type="Label" parent="UIRoot/CalibrationPage/CalibrationContent"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+text = "Allow microphone access when your operating system asks."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KeyLabel" type="Label" parent="UIRoot/CalibrationPage/CalibrationContent"]
+visible = false
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "C4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaterfallArea" type="Control" parent="UIRoot/CalibrationPage/CalibrationContent"]
+visible = false
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+
+[node name="WaterfallBg" type="ColorRect" parent="UIRoot/CalibrationPage/CalibrationContent/WaterfallArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.055, 0.065, 0.082, 1)
+
+[node name="FallingNote" type="ColorRect" parent="UIRoot/CalibrationPage/CalibrationContent/WaterfallArea"]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 12.0
+offset_right = 402.0
+offset_bottom = 46.0
+color = Color(0.33, 0.78, 1, 1)
+
+[node name="HitLine" type="ColorRect" parent="UIRoot/CalibrationPage/CalibrationContent/WaterfallArea"]
+layout_mode = 0
+offset_top = 124.0
+offset_right = 720.0
+offset_bottom = 129.0
+color = Color(1, 1, 1, 0.88)
+
+[node name="CountdownLabel" type="Label" parent="UIRoot/CalibrationPage/CalibrationContent"]
+visible = false
+custom_minimum_size = Vector2(0, 108)
+layout_mode = 2
+theme_override_font_sizes/font_size = 108
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="UIRoot/CalibrationPage/CalibrationContent"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Btn_Retry" type="Button" parent="UIRoot/CalibrationPage/CalibrationContent/Buttons"]
+visible = false
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Retry"
+
+[node name="Btn_Back" type="Button" parent="UIRoot/CalibrationPage/CalibrationContent/Buttons"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Cancel"
 
 [node name="GamePage" type="Control" parent="UIRoot" unique_id=431756262 node_paths=PackedStringArray("song_list_page", "menu_page", "setting_page", "game_ctrl", "eval_ctrl", "judgement_label", "score_label", "combo_label", "pause_button", "pause_overlay", "countdown_overlay", "countdown_label")]
 visible = false
@@ -715,7 +935,12 @@ description = "MAESTRO audio and MIDI are ready for chart conversion."
 [connection signal="pressed" from="UIRoot/SongListPage/Btn_Back" to="UIRoot/SongListPage" method="_on_back_pressed"]
 [connection signal="pressed" from="UIRoot/SongListPage/InfoContainer/Btn_Difficulty" to="UIRoot/SongListPage" method="_on_btn_difficulty_pressed"]
 [connection signal="pressed" from="UIRoot/SongListPage/InfoContainer/Btn_Start" to="UIRoot/SongListPage" method="_on_btn_start_pressed"]
+[connection signal="pressed" from="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent/Buttons/Btn_Calibrate" to="UIRoot/SongListPage" method="_on_calibrate_pressed"]
+[connection signal="pressed" from="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent/Buttons/Btn_StartDirectly" to="UIRoot/SongListPage" method="_on_start_directly_pressed"]
+[connection signal="pressed" from="UIRoot/SongListPage/StartConfirmation/DialogPanel/DialogMargin/DialogContent/Buttons/Btn_Exit" to="UIRoot/SongListPage" method="_on_exit_start_confirmation_pressed"]
 [connection signal="pressed" from="UIRoot/LoadingPage/LoadingContent/Btn_Back" to="UIRoot/LoadingPage" method="_on_btn_back_pressed"]
+[connection signal="pressed" from="UIRoot/CalibrationPage/CalibrationContent/Buttons/Btn_Retry" to="UIRoot/CalibrationPage" method="_on_btn_retry_pressed"]
+[connection signal="pressed" from="UIRoot/CalibrationPage/CalibrationContent/Buttons/Btn_Back" to="UIRoot/CalibrationPage" method="_on_btn_back_pressed"]
 [connection signal="pressed" from="UIRoot/GamePage/Btn_Pause" to="UIRoot/GamePage" method="_on_btn_pause_pressed"]
 [connection signal="pressed" from="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu/Btn_Continue" to="UIRoot/GamePage" method="_on_btn_continue_pressed"]
 [connection signal="pressed" from="UIRoot/GamePage/PauseOverlay/PausePanel/PauseMargin/PauseMenu/Btn_SongList" to="UIRoot/GamePage" method="_on_btn_song_list_pressed"]

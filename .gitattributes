@@ -1,0 +1,67 @@
+# =========================
+# Default text normalization
+# =========================
+* text=auto eol=lf
+
+
+# =========================
+# Godot text resources
+# =========================
+*.tscn text eol=lf
+*.tres text eol=lf
+*.gd text eol=lf
+*.cs text eol=lf
+*.csproj text eol=lf
+*.sln text eol=lf
+*.godot text eol=lf
+*.cfg text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+
+
+# =========================
+# Windows scripts
+# =========================
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+
+# =========================
+# Unix / Linux scripts
+# =========================
+*.sh text eol=lf
+
+
+# =========================
+# Binary files
+# =========================
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.svg text eol=lf
+
+*.wav binary
+*.mp3 binary
+*.flac binary
+*.ogg binary
+*.mid binary
+*.midi binary
+
+*.ttf binary
+*.otf binary
+
+*.zip binary
+*.7z binary
+*.tar.gz binary
+
+*.pt binary
+*.pth binary
+*.ckpt binary
+*.onnx binary
+*.safetensors binary

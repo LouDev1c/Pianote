@@ -11,6 +11,7 @@ extends Control
 @export var btn_difficulty: Button
 @export var btn_start: Button
 @export var preview_player: AudioStreamPlayer
+@export var start_confirmation: Control
 @export var song_items: Array[Button] = []
 
 var current_song: SongData = null
@@ -24,6 +25,8 @@ var _back_button: Button
 
 func _ready() -> void:
 	visible = false
+	if start_confirmation != null:
+		start_confirmation.visible = false
 	_cache_layout_nodes()
 	_configure_static_layout()
 
@@ -46,6 +49,8 @@ func _notification(what: int) -> void:
 			_select_song(music_repo.get_songs().find(current_song), false)
 	if what == NOTIFICATION_VISIBILITY_CHANGED and visible:
 		_show_empty_song_info()
+		if start_confirmation != null:
+			start_confirmation.visible = false
 		call_deferred("_apply_responsive_layout")
 
 
@@ -113,6 +118,21 @@ func _apply_responsive_layout() -> void:
 		_apply_wide_layout(page_width, content_top, content_height, margin, gap)
 
 	_apply_child_sizes(page_width, page_height)
+	_layout_start_confirmation(page_width, page_height)
+
+
+func _layout_start_confirmation(page_width: float, page_height: float) -> void:
+	if start_confirmation == null:
+		return
+	var panel := start_confirmation.get_node_or_null("DialogPanel") as Panel
+	if panel == null:
+		return
+	var panel_size := Vector2(
+		clampf(page_width * 0.58, 560.0, 780.0),
+		clampf(page_height * 0.34, 230.0, 310.0)
+	)
+	panel.position = (Vector2(page_width, page_height) - panel_size) * 0.5
+	panel.size = panel_size
 
 
 func _apply_wide_layout(page_width: float, content_top: float, content_height: float, margin: float, gap: float) -> void:
@@ -352,6 +372,37 @@ func _on_btn_start_pressed() -> void:
 
 	if preview_player != null:
 		preview_player.stop()
+	if start_confirmation != null:
+		start_confirmation.visible = true
+
+
+func _on_calibrate_pressed() -> void:
+	if current_song == null:
+		return
+	if start_confirmation != null:
+		start_confirmation.visible = false
+	var difficulty := _get_current_difficulty()
+	if loading_page != null and loading_page.has_method("begin_calibration_loading"):
+		visible = false
+		loading_page.call("begin_calibration_loading", current_song, difficulty)
+		return
+	push_warning("Calibration loading is unavailable.")
+
+
+func _on_start_directly_pressed() -> void:
+	if start_confirmation != null:
+		start_confirmation.visible = false
+	_begin_selected_song()
+
+
+func _on_exit_start_confirmation_pressed() -> void:
+	if start_confirmation != null:
+		start_confirmation.visible = false
+
+
+func _begin_selected_song() -> void:
+	if current_song == null:
+		return
 
 	var difficulty := _get_current_difficulty()
 	if loading_page != null:

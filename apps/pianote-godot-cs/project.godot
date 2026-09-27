@@ -32,6 +32,10 @@ locale/translations=PackedStringArray("res://localization/translations.en.transl
 
 3d/physics_engine="Jolt Physics"
 
+[pianote]
+
+audio_capture_dotnet_executable="dotnet"
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"

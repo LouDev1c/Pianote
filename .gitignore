@@ -1,26 +1,130 @@
+# =========================
+# Agent / AI tool files
+# =========================
+.agents/
+.agent/
+
+
+# =========================
+# Godot generated cache and temporary files
+# =========================
+.godot/
+.import/
+.fscache/
+.mono/
+
+*.import
+*.bak
+*.tmp
+*.tmp.*
+*~
+*.md5
+*.sha256
+*.cnk
+*.lit
+
+tests/*.result
+tests/*.log
+
+
+# =========================
+# Godot .NET / C# build outputs
+# =========================
+bin/
+obj/
+.vs/
+
+*.suo
+*.user
+*.userosscache
+
+
+# =========================
+# Godot editor user settings
+# =========================
+editor_settings-*.cfg
+editor_layout-*.cfg
+script_editor/
+
+
+# =========================
+# Export and build artifacts
+# =========================
+build/
+export/
+export.cfg
+export_presets.cfg
+
+*.exe
+*.apk
+*.ipa
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+*.7z
+
+
+# =========================
 # Large audio files
+# =========================
 *.wav
 *.mp3
 *.flac
 *.ogg
 
-# Godot generated files
-.godot/
-.import/
+# If small sound effects need to be committed later, add exceptions like:
+# !pianote-godot-cs/assets/sfx/**/*.wav
+# !pianote-godot-cs/assets/sfx/**/*.ogg
 
-# C# / .NET generated files
-.mono/
-bin/
-obj/
 
-# IDE
+# =========================
+# AI model / checkpoint files
+# =========================
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.safetensors
+
+
+# =========================
+# Dataset folders
+# =========================
+data/raw/
+data/processed/
+datasets/
+
+
+# =========================
+# Python generated files and environments
+# =========================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+
+# =========================
+# IDE settings
+# =========================
 .vscode/
 .idea/
 
-# GPT
-.agent/
 
-# OS files
-.DS_Store
+# =========================
+# Logs and crash dumps
+# =========================
+*.log
+*.crash
+*.dump
+*.dmp
+
+
+# =========================
+# System files
+# =========================
 Thumbs.db
+.DS_Store
 desktop.ini

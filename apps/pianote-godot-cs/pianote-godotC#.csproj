@@ -7,6 +7,6 @@
     <RootNamespace>pianotegodotC</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\pianote-chart-converter\Pianote.ChartConverter.csproj" />
+    <ProjectReference Include="..\..\modules\pianote-chart-converter\Pianote.ChartConverter.csproj" />
   </ItemGroup>
 </Project>

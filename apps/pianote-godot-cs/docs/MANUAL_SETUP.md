@@ -1,6 +1,6 @@
 # Pianote Manual Setup
 
-1. Put each performance in its song folder as `preview.wav` and `score.midi`. Godot imports WAV automatically; MIDI is read as raw bytes by the sibling C# chart-converter project.
+1. Put each performance in its song folder as `preview.wav` and `score.midi`. Godot imports WAV automatically; MIDI is read as raw bytes by the C# chart-converter project in `modules/pianote-chart-converter`.
 2. In Godot, open `main.tscn` and select each `MusicRepo/Song_xxx` node.
 3. Confirm that `preview_audio`, `cover_texture`, and `chart_file` point to that song folder.
 4. Add sound effects to `assets/sfx`, then assign them on the `AudioCtrl` node.

@@ -2,6 +2,7 @@ extends Control
 
 @export var song_list_page: Control
 @export var game_page: Control
+@export var calibration_page: Control
 @export var game_ctrl: Node
 @export var title_label: Label
 @export var status_label: Label
@@ -11,6 +12,9 @@ extends Control
 
 var _loading := false
 var _pulse := 0.0
+var _loading_mode := ""
+var _pending_song: SongData
+var _pending_difficulty := "Normal"
 
 
 func _ready() -> void:
@@ -31,6 +35,7 @@ func begin_loading(song: SongData, difficulty: String) -> void:
 		return
 
 	_loading = true
+	_loading_mode = "chart"
 	_pulse = 0.0
 	visible = true
 	set_process(true)
@@ -42,6 +47,47 @@ func begin_loading(song: SongData, difficulty: String) -> void:
 	game_ctrl.call_deferred("PrepareSongAsync", song, difficulty)
 
 
+func begin_calibration_loading(song: SongData, difficulty: String) -> void:
+	if song == null or calibration_page == null:
+		_show_error(tr("The selected song or calibration page is unavailable."))
+		return
+
+	_pending_song = song
+	_pending_difficulty = difficulty
+	_loading = true
+	_loading_mode = "calibration"
+	_pulse = 0.0
+	visible = true
+	set_process(true)
+	title_label.text = tr("Audio Calibration")
+	status_label.text = tr("Loading audio capture module")
+	detail_label.text = tr("Checking .NET, microphone support, and the input device")
+	progress_bar.value = 12.0
+	btn_back.visible = false
+	call_deferred("_prepare_calibration_module")
+
+
+func _prepare_calibration_module() -> void:
+	var audio_capture := AudioCaptureClient.new()
+	var result := await audio_capture.run_action(get_tree(), "check", PackedStringArray(), 12.0)
+	if not _loading or _loading_mode != "calibration":
+		return
+	if result.get("ok", false) != true:
+		_show_error(tr("Unable to load the audio capture module: %s") % str(result.get("error", tr("Unknown error"))))
+		return
+
+	_loading = false
+	set_process(false)
+	progress_bar.value = 100.0
+	status_label.text = tr("Audio capture module ready")
+	detail_label.text = tr("Opening microphone calibration")
+	await get_tree().create_timer(0.35).timeout
+	if _loading_mode != "calibration":
+		return
+	visible = false
+	calibration_page.call("begin_calibration", _pending_song, _pending_difficulty)
+
+
 func _process(delta: float) -> void:
 	if not _loading:
 		return
@@ -51,7 +97,7 @@ func _process(delta: float) -> void:
 
 
 func _on_chart_preparation_started(song_name: String) -> void:
-	if not _loading:
+	if not _loading or _loading_mode != "chart":
 		return
 
 	title_label.text = song_name
@@ -60,7 +106,7 @@ func _on_chart_preparation_started(song_name: String) -> void:
 
 
 func _on_chart_prepared(success: bool, error: String, note_count: int, duration_sec: float) -> void:
-	if not _loading:
+	if not _loading or _loading_mode != "chart":
 		return
 
 	if not success:
@@ -94,6 +140,7 @@ func _show_error(message: String) -> void:
 
 func _on_btn_back_pressed() -> void:
 	_loading = false
+	_loading_mode = ""
 	set_process(false)
 	if game_ctrl != null:
 		game_ctrl.call("StopSong")
